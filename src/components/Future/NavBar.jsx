@@ -7,9 +7,12 @@ export default function NavBar(props){
             <div onClick={() => {props.setTimeFrame("tomorrow")}}>
                 <p style={{fontWeight:props.timeFrame === "tomorrow" ? "bold" : "normal"}}>Tomorrow</p>
             </div>
-            <div>
-                <p>Next 7 Days</p>
-            </div>
+            {props.width < 1000 ? (
+                <div>
+                    <p style={{color:"#4880C5"}}>Next 7 Days ></p>
+                </div>)
+             : null}
+            
         </div>
     )
 }

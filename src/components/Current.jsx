@@ -44,21 +44,24 @@ export default class Current extends Component{
         let day=days[date.getDay()]
         let month = months[date.getMonth()]
         return(
-            <div style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
+            <div style={{display:"flex", flexDirection:"column", alignItems:"center", gap:15}}>
                 <div style={{display:"flex", flexDirection:"row", alignItems:"center"}}>
                     <img src={`http://openweathermap.org/img/wn/${this.props.data.weather[0].icon}@2x.png`}></img>
                     <div>
                         <p style={{fontWeight:"bold"}}>Today</p>
-                        <p>{day}, {date.getDate()} {month}</p>
+                        <p style={{color:"#FFFFFF80"}}>{day}, {date.getDate()} {month}</p>
                     </div>
                 </div>
                 <div style={{display:"flex", flexDirection:"row"}}>
                     <p style={{fontSize:50, margin:0}}>{this.props.data.temp.toFixed(0)}</p>
                     <p>&#176;C</p>
                 </div>
-                <div style={{display:"flex", flexDirection:"row", gap:5}}>
+                <div style={{color:"#FFFFFF80"}}>
+                    <p>{this.props.name}</p>
+                </div>
+                <div style={{display:"flex", flexDirection:"row", gap:5, alignItems:"center", color:"#FFFFFF80"}}>
                     <p>Feels like {this.props.data.feels_like.toFixed(0)}</p>
-                    <p>&#183;</p>
+                    <p style={{fontSize:50, marginTop:-2.5}}>·</p>
                     <p>{this.getSunTimes()}</p>
                 </div>
             </div>

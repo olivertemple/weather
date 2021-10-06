@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import NavBar from "./Future/NavBar";
 import Today from "./Future/Today";
+import smoothscroll from 'smoothscroll-polyfill';
 export default class Future extends Component{
     constructor(props){
         super(props)
@@ -16,25 +17,37 @@ export default class Future extends Component{
         this.setState({
             timeFrame:timeFrame
         })
+        let items = document.getElementsByClassName(timeFrame)
+        for (let i=0; i<items.length; i++){
+            smoothscroll.polyfill();
+            items[i].scrollIntoView({behavior:"smooth"})
+            items[i].click()
+        }
     }
 
-    setActive(key){
+    setActive(key, date){
         this.setState({
             active:key
         })
+        smoothscroll.polyfill();
+        document.getElementById(`hour${key}`).scrollIntoView({behavior:"smooth"})
+        document.getElementById(`item${key}`).scrollIntoView({behavior:"smooth"})
+
+        let today = new Date().getDate()
+        if (today == date){
+            this.setState({timeFrame:"today"})
+        }else{
+            this.setState({timeFrame:"tomorrow"})
+        }
     }
 
-
     render(){
-        console.log(this.props);
 
         return(
-            <div>
-                <NavBar timeFrame={this.state.timeFrame} setTimeFrame={this.setTimeFrame}></NavBar>
+            <div style={{marginTop:40}}>
+                <NavBar timeFrame={this.state.timeFrame} setTimeFrame={this.setTimeFrame} width={this.props.width}></NavBar>
                 <div style={{padding:10}}>
-                    {this.state.timeFrame === "today" ? 
-                            <Today data={this.props.hourly} active={this.state.active} setActive={this.setActive}></Today>
-                    : null}
+                    <Today data={this.props.hourly} active={this.state.active} setActive={this.setActive}></Today>
                 </div>
             </div>
             

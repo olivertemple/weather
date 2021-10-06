@@ -6,7 +6,9 @@ export default class Header extends Component{
         return(
             <div style={{display:"flex", flexDirection:"row", gap:20}}>
                 <img src={menu} style={{filter:"invert(1)"}}/>
-                <h1 style={{textAlign:"center"}}>Weather Forecast</h1>
+                <div style={{display:"flex", justifyContent:"center"}}>
+                    <h1 style={{textAlign:"center", width:"100%"}}>Weather Forecast</h1>
+                </div>
             </div>
         )
     }
