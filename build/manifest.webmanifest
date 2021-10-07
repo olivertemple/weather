@@ -1,0 +1,14 @@
+{
+    "short_name":"Weather",
+    "name":"Weather",
+    "icons":[
+        {
+            "src":"./icon.png",
+            "type":"image/png",
+            "sizes":"512x512"
+        }
+    ],
+    "display":"fullscreen",
+    "start_url":"/",
+    "scope":"/"
+}
