@@ -20,12 +20,12 @@ export default class Current extends Component{
         let sunset = this.props.data.sunset
         let text;
         if (now < sunrise){
-            text = `Sunrise  ${new Date(sunrise).getHours()}:${new Date(sunrise).getMinutes()}`
+            text = `Sunrise  ${new Date(sunrise*1000).getHours()}:${new Date(sunrise*1000).getMinutes()}`
         }else if (now > sunset){
-            text = `Sunset  ${new Date(sunset).getHours()}:${new Date(sunrise).getMinutes()}`
+            text = `Sunset  ${new Date(sunset*1000).getHours()}:${new Date(sunrise*1000).getMinutes()}`
         }else{
             sunrise = this.props.tomorrow.sunrise
-            text = `Sunrise  ${new Date(sunrise).getHours()}:${new Date(sunrise).getMinutes()}`
+            text = `Sunrise  ${new Date(sunrise*1000).getHours()}:${new Date(sunrise*1000).getMinutes()}`
         }
 
         return text
