@@ -4,7 +4,7 @@ export default function WeekItem(props){
     let days= ["SUN","MON","TUE","WED","THUR","FRI","SAT"];
     let date = new Date(props.data.dt*1000)
     return(
-        <div className="row" style={{marginLeft:25, marginRight:25, paddingLeft:25, paddingRight:25, justifyContent:"space-between"}}>
+        <div className="row" style={{marginLeft:25, marginRight:25, paddingLeft:25, paddingRight:25, justifyContent:"space-between"}} onClick={props.setActive}>
             <div style={{width:"5ch"}}>
                 <p>{days[date.getDay()]}</p>
                 <div className="row" style={{padding:5}}>

@@ -1,6 +1,6 @@
 export default function NavBar(props){
     return(
-        <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
+        <div style={{display:"flex", flexDirection:"row", justifyContent:"space-evenly"}}>
             <div onClick={() => {props.setTimeFrame("today")}}>
                 <p style={{fontWeight:props.timeFrame === "today" ? "bold" : "normal"}}>Today</p>
             </div>
@@ -8,7 +8,7 @@ export default function NavBar(props){
                 <p style={{fontWeight:props.timeFrame === "tomorrow" ? "bold" : "normal"}}>Tomorrow</p>
             </div>
             {props.width < 1000 ? (
-                <div>
+                <div onClick={props.showLongTerm}>
                     <p style={{color:"#4880C5"}}>Next 7 Days ></p>
                 </div>)
              : null}

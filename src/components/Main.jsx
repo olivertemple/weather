@@ -10,11 +10,14 @@ export default class Main extends Component{
         this.state = {
             weatherData:null,
             name:null,
-            width:null
+            width:null,
+            longTerm:false
         }
         this.getLocation = this.getLocation.bind(this);
         this.getWeatherData = this.getWeatherData.bind(this);
         this.handelResize = this.handelResize.bind(this);
+        this.showLongTerm = this.showLongTerm.bind(this);
+        this.longTerm = this.longTerm.bind(this);
         this.getLocation();
     }
 
@@ -27,19 +30,22 @@ export default class Main extends Component{
         window.removeEventListener("resize", this.handelResize)
     }
     handelResize(){
+        if (window.innerWidth > 1000){
+            this.setState({longTerm:false})
+        }
         this.setState({
             width:window.innerWidth
         })
     }
 
     getLocation(){
-        //this.getWeatherData({coords:{latitude:51.0365, longitude: -4.1799}})
-        
+        this.getWeatherData({coords:{latitude:51.0365, longitude: -4.1799}})
+        /*
         if (navigator.geolocation){
             navigator.geolocation.getCurrentPosition(this.getWeatherData)
         }else{
             alert("no location")
-        }
+        }*/
     }
 
     async getLocationData(position){
@@ -64,21 +70,44 @@ export default class Main extends Component{
         })
     }
 
+    showLongTerm(){
+        this.setState({longTerm:!this.state.longTerm})
+    }
+
+    longTerm(){
+        let width;
+        if (!this.state.longTerm){
+            if(this.state.width > 1000){
+                width = "66%"
+            }else{
+                width = "0%"
+            }
+        }else{
+            width="100%"
+        }
+        return(
+            <div style={{width:width, overflow:"auto", height:"100%"}}>
+                <LongTerm data={this.state.weatherData.daily}></LongTerm>
+            </div>
+        )
+    }
+
     render(){
 
         if (this.state.weatherData){
             return(
-                <div style={{display:"flex", height:"100%", overflow:"hidden"}}>
-                    <div style={{width:this.state.width > 1000 ? "33%" : "96%", height:"96%", padding:"2%"}}>
+                <div style={{display:"flex", height:"100%"}}>
+                    <div style={{width:this.state.width > 1000 ? "33%" : "96%", height:"90%", padding:"2%"}}>
                         <Header />
-                        <div style={{overflow:"auto", height:"100%"}}>
+                        {!this.state.longTerm ? (
+                        <div style={{overflow:"auto", height:"95%"}}>
                             <Current data={this.state.weatherData.current} tomorrow={this.state.weatherData.daily[1]} name={this.state.name}/>
-                            <Future hourly={this.state.weatherData.hourly} daily={this.state.weatherData.daily} width={this.state.width}/>
-                        </div>
+                            <Future hourly={this.state.weatherData.hourly} daily={this.state.weatherData.daily} width={this.state.width} showLongTerm={this.showLongTerm}/>
+                        </div>) : (
+                            <this.longTerm></this.longTerm>
+                        )}
                     </div>
-                    <div style={{width:this.state.width > 1000 ? "66%" : "0%", overflow:"auto", height:"100%"}}>
-                        <LongTerm data={this.state.weatherData.daily}></LongTerm>
-                    </div>
+                    {!this.state.longTerm ? <this.longTerm></this.longTerm> : null}
                 </div>
                 
             )
