@@ -1,5 +1,4 @@
 import { Component } from "react";
-import Tomorrow from "./Tomorrow";
 import WeekItem from "./WeekItem";
 
 export default class Week extends Component{
@@ -24,11 +23,7 @@ export default class Week extends Component{
             <div style={{display:"flex", flexDirection:"column", gap:10}}>
                 {
                     this.props.data.map((item, key) => {
-                        if (key !== this.state.active){
-                            return <WeekItem data={item} key={key} setActive={() => {this.setActive(key)}}></WeekItem>
-                        }else{
-                            return <Tomorrow data={item} key={key}></Tomorrow>
-                        }
+                        return <WeekItem data={item} key={key} setActive={() => {this.setActive(key)}} selected={this.state.active === key}></WeekItem>
                     })
                 }
             </div>

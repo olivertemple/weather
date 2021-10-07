@@ -76,9 +76,11 @@ export default class Main extends Component{
 
     longTerm(){
         let width;
+        let border = false
         if (!this.state.longTerm){
             if(this.state.width > 1000){
                 width = "66%"
+                border = true
             }else{
                 width = "0%"
             }
@@ -87,7 +89,7 @@ export default class Main extends Component{
         }
         return(
             <div style={{width:width, overflow:"auto", height:"100%"}}>
-                <LongTerm data={this.state.weatherData.daily}></LongTerm>
+                <LongTerm data={this.state.weatherData.daily} border={border} showLongTerm={this.showLongTerm} longTerm={this.state.longTerm}></LongTerm>
             </div>
         )
     }
