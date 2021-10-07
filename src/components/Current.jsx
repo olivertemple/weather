@@ -46,7 +46,7 @@ export default class Current extends Component{
         return(
             <div style={{display:"flex", flexDirection:"column", alignItems:"center", gap:15}}>
                 <div style={{display:"flex", flexDirection:"row", alignItems:"center"}}>
-                    <img src={`http://openweathermap.org/img/wn/${this.props.data.weather[0].icon}@2x.png`}></img>
+                    <img src={`https://openweathermap.org/img/wn/${this.props.data.weather[0].icon}@2x.png`}></img>
                     <div>
                         <p style={{fontWeight:"bold"}}>Today</p>
                         <p style={{color:"#FFFFFF80"}}>{day}, {date.getDate()} {month}</p>

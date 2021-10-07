@@ -24,11 +24,14 @@ export default class Main extends Component{
     componentDidMount(){
         this.setState({width: window.innerWidth})
         window.addEventListener("resize", this.handelResize)
+        window.addEventListener("rotate", this.handelResize)
     }
 
     componentWillUnmount(){
         window.removeEventListener("resize", this.handelResize)
+        window.removeEventListener("rotate", this.handelResize)
     }
+
     handelResize(){
         if (window.innerWidth > 1000){
             this.setState({longTerm:false})
@@ -49,7 +52,7 @@ export default class Main extends Component{
     }
 
     async getLocationData(position){
-        let res = await fetch(`http://api.openweathermap.org/geo/1.0/reverse?lat=${position.coords.latitude}&lon=${position.coords.longitude}&limit=${1}&appid=${process.env.REACT_APP_API_KEY}`)
+        let res = await fetch(`https://api.openweathermap.org/geo/1.0/reverse?lat=${position.coords.latitude}&lon=${position.coords.longitude}&limit=${1}&appid=${process.env.REACT_APP_API_KEY}`)
         let text = await res.text()
         let data = JSON.parse(text)
         let name = data[0]["name"]

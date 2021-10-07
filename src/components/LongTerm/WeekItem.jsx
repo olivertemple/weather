@@ -16,7 +16,7 @@ export default function WeekItem(props){
                     </div>
                 </div>
                 <div style={{justifySelf:"center"}}>
-                    <img src={`http://openweathermap.org/img/wn/${props.data.weather[0].icon}.png`} style={{height:20, width:20, backgroundColor:"#4994E6", borderRadius:100, padding:5}}></img>
+                    <img src={`https://openweathermap.org/img/wn/${props.data.weather[0].icon}.png`} style={{height:20, width:20, backgroundColor:"#4994E6", borderRadius:100, padding:5}}></img>
                 </div>
                 <div className="row" style={{gap:10, justifySelf:"right"}}>
                     <p>{props.data.temp.max.toFixed(0)}&#176;C</p>
@@ -42,7 +42,7 @@ export default function WeekItem(props){
                 <div className="row" style={{justifyContent:"space-between"}}>
                     <div className="row" style={{gap:10}}>
                         <p>{days[date.getDay()]}</p>
-                        <img src={`http://openweathermap.org/img/wn/${props.data.weather[0].icon}.png`} style={{height:30, width:30, backgroundColor:"#4994E6", borderRadius:100, padding:5}}></img>
+                        <img src={`https://openweathermap.org/img/wn/${props.data.weather[0].icon}.png`} style={{height:30, width:30, backgroundColor:"#4994E6", borderRadius:100, padding:5}}></img>
                     </div>
                     <div className="row" style={{gap:5}}>
                         <p>{props.data.temp.max.toFixed(0)}&#176;C</p>

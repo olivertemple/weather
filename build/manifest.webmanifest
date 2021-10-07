@@ -9,6 +9,6 @@
         }
     ],
     "display":"fullscreen",
-    "start_url":"/weather",
+    "start_url":"/weather/",
     "scope":"/"
 }
