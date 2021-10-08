@@ -44,7 +44,7 @@ export default class Future extends Component{
     render(){
 
         return(
-            <div style={{marginTop:40}}>
+            <div style={{marginTop:20}}>
                 <NavBar timeFrame={this.state.timeFrame} setTimeFrame={this.setTimeFrame} width={this.props.width} showLongTerm={this.props.showLongTerm}></NavBar>
                 <div style={{padding:10}}>
                     <Today data={this.props.hourly} active={this.state.active} setActive={this.setActive}></Today>

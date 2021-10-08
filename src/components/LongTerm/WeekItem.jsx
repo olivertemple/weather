@@ -7,16 +7,16 @@ export default function WeekItem(props){
     if (!props.selected){
 
         return(
-            <div className="row" style={{marginLeft:25, marginRight:25, paddingLeft:25, paddingRight:25, justifyContent:"space-between"}} onClick={props.setActive}>
+            <div className="row LongTerm" style={{marginLeft:25, marginRight:25, paddingLeft:25, paddingRight:25, justifyContent:"space-between", marginTop: props.id==0 ? 25 : 0}} onClick={props.setActive}>
                 <div style={{width:"5ch"}}>
                     <p>{days[date.getDay()]}</p>
                     <div className="row" style={{padding:5}}>
                         <img src={rainDrop} style={{height:10, width:10}}></img>
-                        <p style={{fontSize:12, color:"#A6AEB1"}}>{props.data.pop.toFixed(0)}%</p>
+                        <p style={{fontSize:12, color:"#A6AEB1"}}>{(props.data.pop*100).toFixed(0)}%</p>
                     </div>
                 </div>
                 <div style={{justifySelf:"center"}}>
-                    <img src={`https://openweathermap.org/img/wn/${props.data.weather[0].icon}.png`} style={{height:20, width:20, backgroundColor:"#4994E6", borderRadius:100, padding:5}}></img>
+                    <img src={`https://openweathermap.org/img/wn/${props.data.weather[0].icon}.png`} style={{height:20, width:20, backgroundColor:"#b0c8e8", borderRadius:100, padding:5}}></img>
                 </div>
                 <div className="row" style={{gap:10, justifySelf:"right"}}>
                     <p>{props.data.temp.max.toFixed(0)}&#176;C</p>
@@ -38,11 +38,11 @@ export default function WeekItem(props){
 
         let width = window.innerWidth>1000 ? "calc(50% - 30px)" : "100%"
         return(
-            <div style={{margin:25, padding:25,borderRadius:20, backgroundColor:"white", boxShadow:"0px 0px 10px 0px grey"}}>
+            <div className="LongTerm" style={{margin:25, padding:25,borderRadius:20, backgroundColor:"white", boxShadow:"0px 0px 10px 0px grey"}} onClick={props.setActive}>
                 <div className="row" style={{justifyContent:"space-between"}}>
                     <div className="row" style={{gap:10}}>
                         <p>{days[date.getDay()]}</p>
-                        <img src={`https://openweathermap.org/img/wn/${props.data.weather[0].icon}.png`} style={{height:30, width:30, backgroundColor:"#4994E6", borderRadius:100, padding:5}}></img>
+                        <img src={`https://openweathermap.org/img/wn/${props.data.weather[0].icon}.png`} style={{height:30, width:30, backgroundColor:"#b0c8e8", borderRadius:100, padding:5}}></img>
                     </div>
                     <div className="row" style={{gap:5}}>
                         <p>{props.data.temp.max.toFixed(0)}&#176;C</p>
@@ -53,7 +53,7 @@ export default function WeekItem(props){
                     <div className="row" style={{justifyContent:"space-between", flexWrap:"wrap"}}>
                         <div className="row" style={{margin:10, justifyContent:"space-between", gap:10, width:width}}>
                             <p>Precipitation</p>
-                            <p style={{fontSize:14, color:"#A6AEB1"}}>{props.data.pop.toFixed(0)}%</p>
+                            <p style={{fontSize:14, color:"#A6AEB1"}}>{(props.data.pop*100).toFixed(0)}%</p>
                         </div>
                         <div className="row" style={{margin:10, justifyContent:"space-between", gap:10, width:width}}>
                             <p>Wind</p>

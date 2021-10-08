@@ -18,10 +18,10 @@ export default function HourBar(props){
         }
         return(
             <div className={c} style={{display:"flex", flexDirection:"column", alignItems:"center"}} onClick={() =>{props.setActive(props.id, date.getDate())}} id={`hour${props.id}`}>
-                <p style={{color:props.id != props.active ? "#FFFFFF60" : "white"}}>{(pop*100).toFixed(0)}%</p>
+                <p style={{color:props.id != props.active ? "#FFFFFF60" : "white", marginBottom:10, fontSize:15}}>{(pop*100).toFixed(0)}%</p>
                 <div style={{height:`${100 - pop*100}%`, width:0, border:"none", borderLeftWidth:1, borderLeftStyle:"dashed", borderLeftColor:"#2F3062"}}></div>
                 <div style={{height:`${pop*100}%`, backgroundColor:props.id!==props.active ? "#2F3062" : "#F7C411", width:15, borderRadius:10}}></div>
-                <p style={{color:props.id != props.active ? "#FFFFFF60" : "white"}}>{time}</p>
+                <p style={{color:props.id != props.active ? "#FFFFFF60" : "white", marginTop:10, fontSize:12}}>{time}</p>
             </div>
         )
     }else{

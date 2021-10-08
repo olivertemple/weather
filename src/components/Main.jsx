@@ -42,13 +42,13 @@ export default class Main extends Component{
     }
 
     getLocation(){
-        //this.getWeatherData({coords:{latitude:51.0365, longitude: -4.1799}})
-        
+        this.getWeatherData({coords:{latitude:51.0365, longitude: -4.1799}})
+        /*
         if (navigator.geolocation){
             navigator.geolocation.getCurrentPosition(this.getWeatherData)
         }else{
             alert("no location")
-        }
+        }*/
     }
 
     async getLocationData(position){
@@ -101,9 +101,9 @@ export default class Main extends Component{
 
         if (this.state.weatherData){
             return(
-                <div style={{display:"flex", height:"100%"}}>
+                <div className="App" style={{display:"flex", height:"100%", backgroundColor:!this.state.longTerm ? "#10103B" : "#F3FBFF", color:!this.state.longTerm ? "white" : "black"}}>
                     <div style={{width:this.state.width > 1000 ? "33%" : "96%", height:"90%", padding:"2%"}}>
-                        <Header />
+                        <Header invert={!this.state.longTerm}/>
                         {!this.state.longTerm ? (
                         <div style={{overflow:"auto", height:"95%"}}>
                             <Current data={this.state.weatherData.current} tomorrow={this.state.weatherData.daily[1]} name={this.state.name}/>

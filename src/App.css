@@ -5,13 +5,11 @@ p{
 }
 
 .App{
-  background-color: #10103B;
   color:white;
   height: 100%;
 }
 
 *{
-  transition-duration:.2s;
   scrollbar-width:thin;
   scrollbar-color: #6969dd #00000000;
   scrollbar-gutter: stable;
@@ -20,9 +18,11 @@ p{
 
 html, body, #root{
   height:100%;
-  background-color: #10103B;
+  color:white;
 }
-
+.LongTerm{
+  transition-duration: .2s;
+}
 .scollbar {
   border-radius:10px !important
 }

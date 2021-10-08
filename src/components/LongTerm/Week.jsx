@@ -6,7 +6,7 @@ export default class Week extends Component{
         super(props)
 
         this.state = {
-            active:0
+            active:null
         }
 
         this.setActive = this.setActive.bind(this)
@@ -14,16 +14,16 @@ export default class Week extends Component{
 
     setActive(item){
         this.setState({
-            active:item
+            active:item!==this.state.active ? item : null
         })
     }
 
     render(){
         return(
-            <div style={{display:"flex", flexDirection:"column", gap:10}}>
+            <div style={{display:"flex", flexDirection:"column", gap:20}}>
                 {
                     this.props.data.map((item, key) => {
-                        return <WeekItem data={item} key={key} setActive={() => {this.setActive(key)}} selected={this.state.active === key}></WeekItem>
+                        return <WeekItem data={item} id={key} key={key} setActive={() => {this.setActive(key)}} selected={this.state.active === key}></WeekItem>
                     })
                 }
             </div>

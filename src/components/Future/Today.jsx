@@ -13,9 +13,9 @@ export default function Today(props){
                 }
             </div>
             <div style={{height:200, marginTop:40}}>
-                <p>Chance of rain</p>
+                <p style={{fontSize:15}}>Chance of rain</p>
                 <div style={{display:"flex", flexDirection:"row", height:"calc(100% - 40px)"}}>
-                    <div style={{display:"flex", flexDirection:"column", justifyContent:"space-between", height:"calc(100% - 10)", padding:10}}>
+                    <div style={{display:"flex", flexDirection:"column", justifyContent:"space-between", height:"calc(100% - 10)", padding:10, fontSize:15}}>
                         <p>100%</p>
                         <p>0%</p>
                     </div>
