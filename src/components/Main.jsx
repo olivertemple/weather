@@ -3,26 +3,36 @@ import Header from "./Header"
 import Current from "./Current";
 import Future from "./Future";
 import LongTerm from "./LongTerm/LongTerm";
+import Menu from "./Menu/Menu";
 
 export default class Main extends Component{
     constructor(props){
         super(props)
+
+        let active = localStorage.active
+
         this.state = {
             weatherData:null,
             name:null,
-            width:null,
-            longTerm:false
+            width:window.innerWidth,
+            longTerm:false,
+            menu:true,
+            active: active ? JSON.parse(active) : "location"
         }
+
         this.getLocation = this.getLocation.bind(this);
         this.getWeatherData = this.getWeatherData.bind(this);
         this.handelResize = this.handelResize.bind(this);
         this.showLongTerm = this.showLongTerm.bind(this);
         this.longTerm = this.longTerm.bind(this);
+        this.toggleMenu = this.toggleMenu.bind(this);
+        this.getWeatherDataForCity = this.getWeatherDataForCity.bind(this);
+        this.setActive = this.setActive.bind(this);
         this.getLocation();
+
     }
 
     componentDidMount(){
-        this.setState({width: window.innerWidth})
         window.addEventListener("resize", this.handelResize)
         window.addEventListener("rotate", this.handelResize)
     }
@@ -42,13 +52,36 @@ export default class Main extends Component{
     }
 
     getLocation(){
-        this.getWeatherData({coords:{latitude:51.0365, longitude: -4.1799}})
-        /*
-        if (navigator.geolocation){
-            navigator.geolocation.getCurrentPosition(this.getWeatherData)
+        console.log(this.state)
+        if (this.state.active === "location"){
+            this.getWeatherData({coords:{latitude:51.0365, longitude: -4.1799}})
+            /*
+            if (navigator.geolocation){
+                navigator.geolocation.getCurrentPosition(this.getWeatherData)
+            }else{
+                alert("no location")
+            }*/
         }else{
-            alert("no location")
-        }*/
+            this.getWeatherDataForCity(this.state.active);
+        }
+        
+    }
+
+    setActive(location){
+        console.log(location)
+        this.setState({active:location})
+        localStorage.active = JSON.stringify(location)
+
+        this.getWeatherDataForCity(location);
+    }
+
+    async getWeatherDataForCity(location){
+        let res = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${location.city},${location.state},${location.country}&limit=1&appid=${process.env.REACT_APP_API_KEY}`)
+        let text = await res.text();
+        let data = await JSON.parse(text)
+        if (data.length > 0){
+            this.getWeatherData({coords:{longitude:data[0].lon, latitude:data[0].lat}})
+        }
     }
 
     async getLocationData(position){
@@ -60,8 +93,8 @@ export default class Main extends Component{
     }
 
     async getWeatherData(position){
-        this.getLocationData(position)
         console.log(position)
+        this.getLocationData(position)
         let lat = position.coords.latitude;
         let long = position.coords.longitude
         let res = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&units=metric&appid=${process.env.REACT_APP_API_KEY}`)
@@ -97,13 +130,19 @@ export default class Main extends Component{
         )
     }
 
+    toggleMenu(){
+        this.setState({menu:!this.state.menu})
+    }
+
+
     render(){
 
         if (this.state.weatherData){
             return(
-                <div className="App" style={{display:"flex", height:"100%", backgroundColor:!this.state.longTerm ? "#10103B" : "#F3FBFF", color:!this.state.longTerm ? "white" : "black"}}>
+                <div className="App" style={{display:"flex", height:"100%", backgroundColor:!this.state.longTerm ? "#10103B" : "#F3FBFF", color:!this.state.longTerm ? "white" : "#10103B"}}>
+                    <Menu toggleMenu={this.toggleMenu} show={this.state.menu} setActive={this.setActive}></Menu>
                     <div style={{width:this.state.width > 1000 ? "33%" : "96%", height:"90%", padding:"2%"}}>
-                        <Header invert={!this.state.longTerm}/>
+                        <Header menu={this.state.menu} invert={!this.state.longTerm} toggleMenu={this.toggleMenu}/>
                         {!this.state.longTerm ? (
                         <div style={{overflow:"auto", height:"95%"}}>
                             <Current data={this.state.weatherData.current} tomorrow={this.state.weatherData.daily[1]} name={this.state.name}/>

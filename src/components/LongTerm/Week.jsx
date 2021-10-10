@@ -20,7 +20,7 @@ export default class Week extends Component{
 
     render(){
         return(
-            <div style={{display:"flex", flexDirection:"column", gap:20}}>
+            <div style={{display:"flex", flexDirection:"column", gap:10}}>
                 {
                     this.props.data.map((item, key) => {
                         return <WeekItem data={item} id={key} key={key} setActive={() => {this.setActive(key)}} selected={this.state.active === key}></WeekItem>

@@ -20,7 +20,7 @@ export default function WeekItem(props){
                 </div>
                 <div className="row" style={{gap:10, justifySelf:"right"}}>
                     <p>{props.data.temp.max.toFixed(0)}&#176;C</p>
-                    <p style={{color:"#A6AEB1"}}>{props.data.temp.min.toFixed(0)}&#176;C</p>
+                    <p style={{fontSize:14, color:"#A6AEB1"}}>{props.data.temp.min.toFixed(0)}&#176;C</p>
                 </div>
             </div>
         )
@@ -37,11 +37,15 @@ export default function WeekItem(props){
         let sunsetMins = sunset.getMinutes()
 
         let width = window.innerWidth>1000 ? "calc(50% - 30px)" : "100%"
+        console.log(props)
         return(
             <div className="LongTerm" style={{margin:25, padding:25,borderRadius:20, backgroundColor:"white", boxShadow:"0px 0px 10px 0px grey"}} onClick={props.setActive}>
                 <div className="row" style={{justifyContent:"space-between"}}>
                     <div className="row" style={{gap:10}}>
-                        <p>{days[date.getDay()]}</p>
+                        <div className="col">
+                            <p>{days[date.getDay()]}</p>
+                            <p style={{fontSize:14, color:"#A6AEB1"}}>{props.data.weather[0].description}</p>
+                        </div>
                         <img src={`https://openweathermap.org/img/wn/${props.data.weather[0].icon}.png`} style={{height:30, width:30, backgroundColor:"#b0c8e8", borderRadius:100, padding:5}}></img>
                     </div>
                     <div className="row" style={{gap:5}}>
@@ -49,7 +53,7 @@ export default function WeekItem(props){
                         <p style={{fontSize:14, color:"#A6AEB1"}}>{props.data.temp.min.toFixed(0)}&#176;C</p>
                     </div>
                 </div>
-                <div style={{justifyContent:"space-between"}}>
+                <div>
                     <div className="row" style={{justifyContent:"space-between", flexWrap:"wrap"}}>
                         <div className="row" style={{margin:10, justifyContent:"space-between", gap:10, width:width}}>
                             <p>Precipitation</p>

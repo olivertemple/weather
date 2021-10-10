@@ -9,6 +9,9 @@ p{
   height: 100%;
 }
 
+.menu{
+  transition-duration: 0.2s;
+}
 *{
   scrollbar-width:thin;
   scrollbar-color: #6969dd #00000000;
