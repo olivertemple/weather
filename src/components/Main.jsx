@@ -16,7 +16,7 @@ export default class Main extends Component{
             name:null,
             width:window.innerWidth,
             longTerm:false,
-            menu:true,
+            menu:false,
             active: active ? JSON.parse(active) : "location"
         }
 
@@ -28,6 +28,7 @@ export default class Main extends Component{
         this.toggleMenu = this.toggleMenu.bind(this);
         this.getWeatherDataForCity = this.getWeatherDataForCity.bind(this);
         this.setActive = this.setActive.bind(this);
+        this.handelClick = this.handelClick.bind(this);
         this.getLocation();
 
     }
@@ -35,11 +36,30 @@ export default class Main extends Component{
     componentDidMount(){
         window.addEventListener("resize", this.handelResize)
         window.addEventListener("rotate", this.handelResize)
+        window.addEventListener("click", (e => {this.handelClick(e)}))
     }
 
     componentWillUnmount(){
         window.removeEventListener("resize", this.handelResize)
         window.removeEventListener("rotate", this.handelResize)
+        window.removeEventListener("click", (e => {this.handelClick(e)}))
+    }
+
+    handelClick(e){
+        console.log(e)
+        let x = e.clientX;
+        let y = e.clientY;
+
+        let menu = document.getElementById("menu");
+        let menuDetails = menu.getBoundingClientRect();
+        if (x < menuDetails.width && y < menuDetails.height){
+            return null
+        }else{
+            let menu = document.getElementById("menu expand")
+            if (this.state.menu && e.target != menu){
+                this.toggleMenu()
+            }
+        }
     }
 
     handelResize(){
@@ -54,13 +74,13 @@ export default class Main extends Component{
     getLocation(){
         console.log(this.state)
         if (this.state.active === "location"){
-            this.getWeatherData({coords:{latitude:51.0365, longitude: -4.1799}})
-            /*
+            //this.getWeatherData({coords:{latitude:51.0365, longitude: -4.1799}})
+            
             if (navigator.geolocation){
                 navigator.geolocation.getCurrentPosition(this.getWeatherData)
             }else{
                 alert("no location")
-            }*/
+            }
         }else{
             this.getWeatherDataForCity(this.state.active);
         }
@@ -69,10 +89,11 @@ export default class Main extends Component{
 
     setActive(location){
         console.log(location)
-        this.setState({active:location})
+        this.setState({active:location}, () => {
+            this.getLocation()
+        })
         localStorage.active = JSON.stringify(location)
 
-        this.getWeatherDataForCity(location);
     }
 
     async getWeatherDataForCity(location){
@@ -131,6 +152,7 @@ export default class Main extends Component{
     }
 
     toggleMenu(){
+        console.log("here")
         this.setState({menu:!this.state.menu})
     }
 
@@ -145,7 +167,7 @@ export default class Main extends Component{
                         <Header menu={this.state.menu} invert={!this.state.longTerm} toggleMenu={this.toggleMenu}/>
                         {!this.state.longTerm ? (
                         <div style={{overflow:"auto", height:"95%"}}>
-                            <Current data={this.state.weatherData.current} tomorrow={this.state.weatherData.daily[1]} name={this.state.name}/>
+                            <Current data={this.state.weatherData.current} tomorrow={this.state.weatherData.daily[1]} name={this.state.name} active={this.state.active}/>
                             <Future hourly={this.state.weatherData.hourly} daily={this.state.weatherData.daily} width={this.state.width} showLongTerm={this.showLongTerm}/>
                         </div>) : (
                             <this.longTerm></this.longTerm>

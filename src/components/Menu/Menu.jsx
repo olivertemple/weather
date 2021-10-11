@@ -1,6 +1,7 @@
 import React, { Component, useState } from "react";
 import Location from "./Location";
 import Search from "./Search";
+import pin from "../../assets/pin.png";
 
 export default class Menu extends Component{
     constructor(props){
@@ -38,11 +39,14 @@ export default class Menu extends Component{
     render(){
         
         return(
-            <div className="menu" style={{height:"100%", width:this.props.show ? "40%" : 0, backgroundColor:"#F3FBFF", position:"absolute", zIndex:10, color:"black"}}>
+            <div id="menu" className="menu" style={{height:"100%", width:this.props.show ? "40%" : 0, backgroundColor:"#F3FBFF", position:"absolute", zIndex:10, color:"black", boxShadow:"1px 10px 10px #10103B"}}>
                 <div style={{display:this.props.show ? "block" : "none", padding:10}}>
 
                     <div style={{marginTop:50}}>
-                        <p style={{fontSize:25}}>Locations</p>
+                        <div className="row" style={{gap:10}}>
+                            <img src={pin} alt="location pin" style={{height:30, width:30}} onClick={() => {this.setActive("location")}}/>
+                            <p style={{fontSize:25}}>Places</p>
+                        </div>
                         <div className="col" style={{gap:10, width:"100%", marginTop:15}}>
                             {this.state.storedLocations.map((item, key) => {
                                 return(

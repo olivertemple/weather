@@ -4,6 +4,7 @@ import PartialClouds from "./icons/PartialClouds";
 import Clouds from "./icons/Clouds";
 import Showers from "./icons/Showers";
 import Rain from "./icons/Rain";
+import pin from "../assets/pin2.png"
 
 export default class Current extends Component{
     constructor(props){
@@ -56,7 +57,8 @@ export default class Current extends Component{
                     <p style={{fontSize:100, margin:0}}>{this.props.data.temp.toFixed(0)}</p>
                     <p style={{fontSize:20}}>&#176;C</p>
                 </div>
-                <div style={{color:"#FFFFFF80"}}>
+                <div className="row" style={{color:"#FFFFFF80", gap:5}}>
+                    <img src={pin} alt="location pin" style={{height:15, width:this.props.active==="location" ? 15 : 0}}/>
                     <p>{this.props.name}</p>
                 </div>
                 <div style={{display:"flex", flexDirection:"row", gap:5, alignItems:"center", color:"#FFFFFF80"}}>

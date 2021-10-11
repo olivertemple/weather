@@ -23,7 +23,7 @@ export default function Today(props){
                         {
                             props.data.map((item, key) => {
                                 return(
-                                    <HourBar id={key} data={item} active={props.active} setActive={props.setActive}/>
+                                    <HourBar key={key} id={key} data={item} active={props.active} setActive={props.setActive}/>
                                 )
                             })
                         }
