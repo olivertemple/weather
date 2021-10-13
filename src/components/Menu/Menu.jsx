@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 import Location from "./Location";
 import Search from "./Search";
 import pin from "../../assets/pin.png";
@@ -9,14 +9,31 @@ export default class Menu extends Component{
         let storedLocations = eval(localStorage.locations)
 
         this.state = {
-            storedLocations:storedLocations ? storedLocations : []
+            storedLocations:storedLocations ? storedLocations : [],
+            width:window.innerWidth > 1000 ? "40%" : "100%"
         }
 
         this.removeItem = this.removeItem.bind(this);
         this.addItem = this.addItem.bind(this);
         this.setActive = this.setActive.bind(this);
+        this.handelResize = this.handelResize.bind(this);
 
     }
+
+    componentDidMount(){
+        window.addEventListener("resize", this.handelResize)
+    }
+
+    componentWillUnmount(){
+        window.removeEventListener("resize", this.handelResize)
+    }
+
+    handelResize(){
+        this.setState({
+            width:window.innerWidth > 1000 ? "40%" : "100%"
+        })
+    }
+
     removeItem(item){
         let storedLocations = this.state.storedLocations
         storedLocations.splice(storedLocations.indexOf(item),1)
@@ -29,6 +46,7 @@ export default class Menu extends Component{
         storedLocations.push(item)
         this.setState({storedLocations:storedLocations})
         localStorage.locations = JSON.stringify(storedLocations)
+        this.setActive(item)
     }
 
     setActive(location){
@@ -37,9 +55,8 @@ export default class Menu extends Component{
     }
 
     render(){
-        
         return(
-            <div id="menu" className="menu" style={{height:"100%", width:this.props.show ? "40%" : 0, backgroundColor:"#F3FBFF", position:"absolute", zIndex:10, color:"black", boxShadow:"1px 10px 10px #10103B"}}>
+            <div id="menu" className="menu" style={{height:"100%", width:this.props.show ? this.state.width : 0, backgroundColor:"#F3FBFF", position:"absolute", zIndex:10, color:"black", boxShadow:"1px 10px 10px #10103B"}}>
                 <div style={{display:this.props.show ? "block" : "none", padding:10}}>
 
                     <div style={{marginTop:50}}>

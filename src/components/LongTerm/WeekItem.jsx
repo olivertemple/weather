@@ -7,7 +7,7 @@ export default function WeekItem(props){
     if (!props.selected){
 
         return(
-            <div className="row LongTerm" style={{marginLeft:25, marginRight:25, paddingLeft:25, paddingRight:25, justifyContent:"space-between", marginTop: props.id==0 ? 25 : 0}} onClick={props.setActive}>
+            <div className="row LongTerm" style={{marginLeft:"1%", marginRight:"1%", paddingLeft:25, paddingRight:25, justifyContent:"space-between", marginTop: props.id==0 ? 25 : 0}} onClick={props.setActive}>
                 <div style={{width:"5ch"}}>
                     <p>{days[date.getDay()]}</p>
                     <div className="row" style={{padding:5}}>
@@ -39,7 +39,7 @@ export default function WeekItem(props){
         let width = window.innerWidth>1000 ? "calc(50% - 30px)" : "100%"
         console.log(props)
         return(
-            <div className="LongTerm" style={{margin:25, padding:25,borderRadius:20, backgroundColor:"white", boxShadow:"0px 0px 10px 0px grey"}} onClick={props.setActive}>
+            <div className="LongTerm" style={{margin:"1%", padding:25,borderRadius:20, backgroundColor:"white", boxShadow:"0px 0px 10px 0px grey"}} onClick={props.setActive}>
                 <div className="row" style={{justifyContent:"space-between"}}>
                     <div className="row" style={{gap:10}}>
                         <div className="col">

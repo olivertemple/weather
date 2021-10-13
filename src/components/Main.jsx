@@ -74,13 +74,13 @@ export default class Main extends Component{
     getLocation(){
         console.log(this.state)
         if (this.state.active === "location"){
-            //this.getWeatherData({coords:{latitude:51.0365, longitude: -4.1799}})
-            
+            this.getWeatherData({coords:{latitude:51.0365, longitude: -4.1799}})
+            /*
             if (navigator.geolocation){
                 navigator.geolocation.getCurrentPosition(this.getWeatherData)
             }else{
                 alert("no location")
-            }
+            }*/
         }else{
             this.getWeatherDataForCity(this.state.active);
         }
