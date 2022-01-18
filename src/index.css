@@ -11,3 +11,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@font-face {
+  font-family: "artill_clean_icons";
+  src: local("artill_clean_icons"), url("./assets/artill_clean_icons.otf") format("truetype");
+}

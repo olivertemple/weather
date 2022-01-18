@@ -1,3 +1,4 @@
+import "./assets/artill_clean_icons.otf";
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';

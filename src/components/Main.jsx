@@ -4,6 +4,7 @@ import Current from "./Current";
 import Future from "./Future";
 import LongTerm from "./LongTerm/LongTerm";
 import Menu from "./Menu/Menu";
+import cloud from "../assets/cloud.png";
 
 export default class Main extends Component{
     constructor(props){
@@ -163,7 +164,8 @@ export default class Main extends Component{
             return(
                 <div className="App" style={{display:"flex", height:"100%", backgroundColor:!this.state.longTerm ? "#10103B" : "#F3FBFF", color:!this.state.longTerm ? "white" : "#10103B"}}>
                     <Menu toggleMenu={this.toggleMenu} show={this.state.menu} setActive={this.setActive}></Menu>
-                    <div style={{width:this.state.width > 1000 ? "33%" : "96%", height:"90%", padding:"2%"}}>
+                    <div style={{width:this.state.width > 1000 ? "33%" : "96%", height:"90%", padding:"2%", backgroundImage:cloud}}>
+                        
                         <Header menu={this.state.menu} invert={!this.state.longTerm} toggleMenu={this.toggleMenu}/>
                         {!this.state.longTerm ? (
                         <div style={{overflow:"auto", height:"95%"}}>

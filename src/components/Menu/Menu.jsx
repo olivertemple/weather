@@ -57,7 +57,7 @@ export default class Menu extends Component{
     render(){
         return(
             <div id="menu" className="menu" style={{height:"100%", width:this.props.show ? this.state.width : 0, backgroundColor:"#F3FBFF", position:"absolute", zIndex:10, color:"black", boxShadow:"1px 10px 10px #10103B"}}>
-                <div style={{display:this.props.show ? "block" : "none", padding:10}}>
+                <div style={{display:this.props.show ? "block" : "none", padding:10, marginTop:20}}>
 
                     <div style={{marginTop:50}}>
                         <div className="row" style={{gap:10}}>

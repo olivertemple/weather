@@ -1,11 +1,6 @@
 import React, { Component } from "react";
-import Clear from "./icons/Clear";
-import PartialClouds from "./icons/PartialClouds";
-import Clouds from "./icons/Clouds";
-import Showers from "./icons/Showers";
-import Rain from "./icons/Rain";
 import pin from "../assets/pin2.png"
-
+import Icon from "./Icon";
 export default class Current extends Component{
     constructor(props){
         super(props)
@@ -36,6 +31,7 @@ export default class Current extends Component{
         let now = + new Date();
         return now > this.props.data.sunrise || now < this.props.data.sunset
     }
+    // /<img src={`https://openweathermap.org/img/wn/${this.props.data.weather[0].icon}@2x.png`}></img>
 
     render(){
         console.log(this.props)
@@ -46,13 +42,17 @@ export default class Current extends Component{
         let month = months[date.getMonth()]
         return(
             <div style={{display:"flex", flexDirection:"column", alignItems:"center", gap:5}}>
-                <div style={{display:"flex", flexDirection:"row", alignItems:"center"}}>
-                    <img src={`https://openweathermap.org/img/wn/${this.props.data.weather[0].icon}@2x.png`}></img>
-                    <div>
-                        <p style={{fontSize:30}}>Today</p>
-                        <p style={{color:"#FFFFFF80", fontSize:15}}>{day}, {date.getDate()} {month}</p>
+                <div className="col" style={{alignItems:"center"}}>
+                    <div style={{display:"flex", flexDirection:"row", alignItems:"center"}}>
+                        <Icon icon={this.props.data.weather[0].icon} fontSize={100} marginTop={-30} data={this.props.data}></Icon>
+                        <div>
+                            <p style={{fontSize:30}}>Today</p>
+                            <p style={{color:"#FFFFFF80", fontSize:15}}>{day}, {date.getDate()} {month}</p>
+                        </div>
                     </div>
+                    <p style={{color:"#FFFFFF80", fontSize:15}}>{this.props.data.weather[0].description}</p>
                 </div>
+                
                 <div style={{display:"flex", flexDirection:"row"}}>
                     <p style={{fontSize:100, margin:0}}>{this.props.data.temp.toFixed(0)}</p>
                     <p style={{fontSize:20}}>&#176;C</p>
